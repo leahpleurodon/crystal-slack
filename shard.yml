@@ -1,0 +1,22 @@
+name: rea-crystal-bot
+version: 0.0.1
+
+authors:
+  - Leah Eramo <crystal-bot@leaheramo.info>
+
+description: |
+  A Slack bot library for Crystal
+
+crystal: 0.28.0
+
+dependencies:
+  crest:
+    github: mamantoha/crest
+
+development_dependencies:
+  minitest:
+    git: https://github.com/ysbaddaden/minitest.cr.git
+    version: "~> 0.1.0"
+  vcr:
+    github: spoved/vcr.cr
+license: GNU GPLv3
