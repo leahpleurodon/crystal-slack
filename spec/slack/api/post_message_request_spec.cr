@@ -23,7 +23,7 @@ describe Slack::Api::PostMessageRequest do
         channel,
         api_token,
         text
-      ).response
+      ).perform!
 
       json_body = JSON.parse(response.body)
       response.status_code.should eq(200)
@@ -49,7 +49,7 @@ describe Slack::Api::PostMessageRequest do
         channel,
         api_token,
         text
-      ).response
+      ).perform!
 
       json_body = JSON.parse(response.body)
       response.status_code.should eq(200)
