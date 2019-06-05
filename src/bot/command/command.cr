@@ -28,7 +28,7 @@ module Bot
         end
 
         private def matches_demand?(string : String) : Bool
-            match = /\A(#{@bot.name}\s|<@#{@bot.id}>\s)+#{@matcher}\z/i =~ string
+            match = /\A(?:#{@bot.name}\s|<@#{@bot.id}>\s)+#{@matcher}\z/i =~ string
             !!match
         end
 
