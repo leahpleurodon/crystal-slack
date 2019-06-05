@@ -12,7 +12,7 @@ module Slack
                 @t_stamp = t_stamp
             end
 
-            def response
+            def perform!
                 response = HTTP::Client.post(
                     "https://slack.com/api/chat.postMessage", 
                     headers: HTTP::Headers{
