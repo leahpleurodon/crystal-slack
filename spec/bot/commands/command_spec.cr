@@ -4,10 +4,20 @@ require "../../../src/slack/api/*"
 
 module Bot
     describe "#match?" do
+
+        WebMock.stub(:get, "https://slack.com/api/auth.test?token=#{ENV["SLACK_BOT_TOKEN"]}")
+        .to_return(
+            status: 200, 
+            body: "{
+                \"ok\": false,
+                \"error\": \"invalid_auth\"
+            }", 
+            headers: {"mocked" => "true"}
+        )
         it "matches regex for HEAR command type without bot name" do
             string_to_match = "whats the weather like in Brussels?"
             command = Command.new(
-                Bot.new("token", "bot mc-botface"),
+                Bot.new("BOT"),
                 Slack::Api::PostMessageRequest.new(
                     "12345",
                     "ABC-123-DEF-456",
@@ -23,7 +33,7 @@ module Bot
         it "doesn't match regex for HEAR command type without bot name" do
             string_to_match = "hows the the weather like in Brussels?"
             command = Command.new(
-                Bot.new("token", "bot mc-botface"),
+                Bot.new("BOT"),
                 Slack::Api::PostMessageRequest.new(
                     "12345",
                     "ABC-123-DEF-456",
@@ -39,7 +49,7 @@ module Bot
         it "doesn't match regex for DEMAND command type without bot name" do
             string_to_match = "whats the weather like in Brussels?"
             command = Command.new(
-                Bot.new("token", "bot mc-botface"),
+                Bot.new("BOT"),
                 Slack::Api::PostMessageRequest.new(
                     "12345",
                     "ABC-123-DEF-456",
@@ -53,9 +63,9 @@ module Bot
         end
 
         it "matches regex for DEMAND command type with bot name" do
-            string_to_match = "bot mc-botface whats the weather like in Brussels?"
+            string_to_match = "BOT whats the weather like in Brussels?"
             command = Command.new(
-                Bot.new("token", "bot mc-botface"),
+                Bot.new("BOT"),
                 Slack::Api::PostMessageRequest.new(
                     "12345",
                     "ABC-123-DEF-456",
@@ -68,9 +78,9 @@ module Bot
         end
 
         it "matches regex for DEMAND command type with bot ID" do
-            string_to_match = "<@0> whats the weather like in Brussels?"
+            string_to_match = "<@NOID> whats the weather like in Brussels?"
             command = Command.new(
-                Bot.new("token", "bot mc-botface"),
+                Bot.new("BOT"),
                 Slack::Api::PostMessageRequest.new(
                     "12345",
                     "ABC-123-DEF-456",
@@ -82,5 +92,6 @@ module Bot
 
             command.matches?(string_to_match).should be_true
         end
+        WebMock.reset
     end
 end
