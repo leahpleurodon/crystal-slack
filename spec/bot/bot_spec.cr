@@ -21,7 +21,7 @@ describe Bot::Bot do
             }", 
             headers: {"mocked" => "true"}
         )
-        bot = Bot::Bot.new
+        bot = Bot::Bot.new(ENV["SLACK_BOT_TOKEN"])
         bot.name.should eq("PLEURODON")
 
         WebMock.reset
@@ -39,7 +39,7 @@ describe Bot::Bot do
           }", 
           headers: {"mocked" => "true"}
       )
-        bot = Bot::Bot.new
+        bot = Bot::Bot.new(ENV["SLACK_BOT_TOKEN"])
         bot.name.should eq("BOT")
 
         WebMock.reset

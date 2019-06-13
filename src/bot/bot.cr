@@ -1,4 +1,3 @@
-require "./command/command"
 require "json"
 require "../slack/api/auth_test_request"
 
@@ -6,12 +5,12 @@ module Bot
     class Bot
         
         getter id : String
+        getter token : String
         getter name : String
 
-        def initialize(name : String = "")
-            @token = ENV["SLACK_BOT_TOKEN"]
+        def initialize(bot_api_token : String, name : String = "")
+            @token = bot_api_token
             @name = parse_auth_data["user"].as_s
-            @commands = [] of Command
             @id = parse_auth_data["user_id"].as_s
             @auth_data = uninitialized JSON::Any
         end

@@ -4,9 +4,9 @@ module Slack
     module Api
         class PostMessageRequest
             
-            def initialize(channel : String, text : String, t_stamp : String = "0")
+            def initialize(channel : String, text : String, bot_token : String, t_stamp : String = "0")
                 @channel = channel
-                @api_token = ENV["SLACK_BOT_TOKEN"]
+                @api_token = bot_token
                 @text = text
                 @request_body = JSON.parse("{\"ok\":\"false\"}")
                 @t_stamp = t_stamp

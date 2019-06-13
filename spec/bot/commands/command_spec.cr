@@ -17,11 +17,12 @@ module Bot
         it "matches regex for HEAR command type without bot name" do
             string_to_match = "whats the weather like in Brussels?"
             command = Command.new(
-                Bot.new("BOT"),
+                Bot.new(ENV["SLACK_BOT_TOKEN"],"BOT"),
                 Slack::Api::PostMessageRequest.new(
-                    "12345",
-                    "ABC-123-DEF-456",
-                    "tra la la la la"
+                    "CHANNEL111",
+                    "TEXT",
+                    ENV["SLACK_BOT_TOKEN"],
+                    "0"
                 ),
                 CommandType::HEAR,
                 "what'*s the weather like in (\\w+)\\?*"
@@ -33,11 +34,12 @@ module Bot
         it "doesn't match regex for HEAR command type without bot name" do
             string_to_match = "hows the the weather like in Brussels?"
             command = Command.new(
-                Bot.new("BOT"),
+                Bot.new(ENV["SLACK_BOT_TOKEN"],"BOT"),
                 Slack::Api::PostMessageRequest.new(
-                    "12345",
-                    "ABC-123-DEF-456",
-                    "tra la la la la"
+                    "CHANNEL111",
+                    "TEXT",
+                    ENV["SLACK_BOT_TOKEN"],
+                    "0"
                 ),
                 CommandType::HEAR,
                 "what'*s the weather like in (\\w+)\\?*"
@@ -49,11 +51,12 @@ module Bot
         it "doesn't match regex for DEMAND command type without bot name" do
             string_to_match = "whats the weather like in Brussels?"
             command = Command.new(
-                Bot.new("BOT"),
+                Bot.new(ENV["SLACK_BOT_TOKEN"],"BOT"),
                 Slack::Api::PostMessageRequest.new(
-                    "12345",
-                    "ABC-123-DEF-456",
-                    "tra la la la la"
+                    "CHANNEL111",
+                    "TEXT",
+                    ENV["SLACK_BOT_TOKEN"],
+                    "0"
                 ),
                 CommandType::DEMAND,
                 "what'*s the weather like in (\\w+)\\?*"
@@ -65,11 +68,12 @@ module Bot
         it "matches regex for DEMAND command type with bot name" do
             string_to_match = "BOT whats the weather like in Brussels?"
             command = Command.new(
-                Bot.new("BOT"),
+                Bot.new(ENV["SLACK_BOT_TOKEN"],"BOT"),
                 Slack::Api::PostMessageRequest.new(
-                    "12345",
-                    "ABC-123-DEF-456",
-                    "tra la la la la"
+                    "CHANNEL111",
+                    "TEXT",
+                    ENV["SLACK_BOT_TOKEN"],
+                    "0"
                 ),
                 CommandType::DEMAND,
                 "what'*s the weather like in (\\w+)\\?*"
@@ -80,11 +84,12 @@ module Bot
         it "matches regex for DEMAND command type with bot ID" do
             string_to_match = "<@NOID> whats the weather like in Brussels?"
             command = Command.new(
-                Bot.new("BOT"),
+                Bot.new(ENV["SLACK_BOT_TOKEN"],"BOT"),
                 Slack::Api::PostMessageRequest.new(
-                    "12345",
-                    "ABC-123-DEF-456",
-                    "tra la la la la"
+                    "CHANNEL111",
+                    "TEXT",
+                    ENV["SLACK_BOT_TOKEN"],
+                    "0"
                 ),
                 CommandType::DEMAND,
                 "what'*s the weather like in (\\w+)\\?*"

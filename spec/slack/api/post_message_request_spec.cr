@@ -20,7 +20,8 @@ describe Slack::Api::PostMessageRequest do
 
       response = Slack::Api::PostMessageRequest.new(
         channel,
-        text
+        text,
+        ENV["SLACK_BOT_TOKEN"]
       ).perform!
 
       json_body = JSON.parse(response.body)
@@ -45,7 +46,8 @@ describe Slack::Api::PostMessageRequest do
 
       response = Slack::Api::PostMessageRequest.new(
         channel,
-        text
+        text,
+        ENV["SLACK_BOT_TOKEN"]
       ).perform!
 
       json_body = JSON.parse(response.body)
