@@ -12,6 +12,8 @@ crystal: 0.28.0
 dependencies:
   crest:
     github: mamantoha/crest
+  kemal:
+    github: kemalcr/kemal
 
 development_dependencies:
   minitest:
