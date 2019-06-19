@@ -7,10 +7,10 @@ script:
   - crystal docs
 
 deploy:
-provider: pages
-skip_cleanup: true
-github_token: $GITHUB_TOKEN
-project_name: crystal-slack
-on:
-  branch: master
-local_dir: docs
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  project_name: crystal-slack
+  on:
+    branch: master
+  local_dir: docs
