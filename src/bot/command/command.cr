@@ -4,6 +4,7 @@ require "../../slack/api/*"
 
 module Bot
     class Command
+        getter action : Slack::Api::PostMessageRequest
         def initialize(
                 bot : Bot, 
                 action : Slack::Api::PostMessageRequest, 
