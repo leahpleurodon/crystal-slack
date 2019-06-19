@@ -3,6 +3,4 @@ require "crest"
 require "json"
 
 module Rea::Crystal::Bot
-
-
 end
