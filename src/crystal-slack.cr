@@ -3,6 +3,6 @@ require "crest"
 require "json"
 require "./**"
 
-module SlackCrystal
+module CrystalSlack
 
 end
