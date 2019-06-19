@@ -4,7 +4,7 @@ require "../../../src/slack/**"
 
 module Bot
   describe "#find_command_match" do
-    WebMock.stub(:get, "https://slack.com/api/auth.test?token=xoxb-108037142003-653114220229-lImeoxhWY7Kpt9SFtr5qClcY")
+    WebMock.stub(:get, "https://slack.com/api/auth.test?token=#{ENV["SLACK_BOT_TOKEN"]}")
       .to_return(body: "{\"ok\":\"true\"}")
     bot1 = Bot.new(ENV["SLACK_BOT_TOKEN"], "BOT1")
     event1 = Slack::Api::Event.new(Slack::Api::EventType::CHANNEL,

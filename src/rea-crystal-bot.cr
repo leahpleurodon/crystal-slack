@@ -1,6 +1,8 @@
-# TODO: Write documentation for `Rea::Crystal::Bot`
+# TODO: Write documentation for `SlackCrystal`
 require "crest"
 require "json"
+require "./**"
 
-module Rea::Crystal::Bot
+module SlackCrystal
+
 end
