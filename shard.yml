@@ -1,11 +1,11 @@
-name: rea-crystal-bot
+name: crystal-slack
 version: 0.0.1
 
 authors:
-  - Leah Eramo <crystal-bot@leaheramo.info>
+  - Leah Eramo <crystal-slack@leaheramo.info>
 
 description: |
-  A Slack bot library for Crystal
+  A Slack library for Crystal - bots only at the moment.
 
 crystal: 0.28.0
 
