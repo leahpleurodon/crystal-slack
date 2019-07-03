@@ -2,7 +2,7 @@ require "../../spec_helper"
 require "webmock"
 require "json"
 
-describe Bot::Bot do
+describe Bot do
   describe "#name" do
     it "gets an ok response" do
       WebMock.stub(:get, "https://slack.com/api/auth.test?token=#{ENV["SLACK_BOT_TOKEN"]}")
@@ -18,7 +18,7 @@ describe Bot::Bot do
             }",
         headers: {"mocked" => "true"}
       )
-      bot = Bot::Bot.new(ENV["SLACK_BOT_TOKEN"])
+      bot = Bot.new(ENV["SLACK_BOT_TOKEN"])
       bot.name.should eq("PLEURODON")
 
       WebMock.reset
@@ -35,7 +35,7 @@ describe Bot::Bot do
           }",
         headers: {"mocked" => "true"}
       )
-      bot = Bot::Bot.new(ENV["SLACK_BOT_TOKEN"])
+      bot = Bot.new(ENV["SLACK_BOT_TOKEN"])
       bot.name.should eq("BOT")
 
       WebMock.reset

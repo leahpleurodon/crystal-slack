@@ -2,41 +2,64 @@ require "../**"
 require "../exception/invalid_command_type"
 require "../../slack/api/*"
 
-module Bot
-  class Command
-    getter action : Slack::Api::PostMessageRequest
+class Command
+  getter response : Response
 
-    def initialize(
-      bot : Bot,
-      action : Slack::Api::PostMessageRequest,
-      command_type : CommandType,
-      matcher : String
+  def initialize(
+    bot : Bot,
+    command_type : CommandType,
+    matcher : String
+  )
+    @bot = bot
+    @command_type = command_type
+    @matcher = matcher
+    @response = uninitialized Response
+  end
+
+  def matches?(string : String) : Bool
+    case @command_type
+    when CommandType::HEAR
+      return matches_hear?(string)
+    when CommandType::DEMAND
+      return matches_demand?(string)
+    else
+      raise InvalidCommandType.new("invalid command type provided to bot")
+    end
+  end
+
+  def gen_auto_response(text : String, event : Slack::Api::Event) : Response
+    Response.new(
+                  event: event, 
+                  text: text,
+                  channel: event.event_channel,
+                  bot: @bot,
+                  timestamp: "0"
     )
-      @bot = bot
-      @action = action
-      @command_type = command_type
-      @matcher = matcher
-    end
+  end
 
-    def matches?(string : String) : Bool
-      case @command_type
-      when CommandType::HEAR
-        return matches_hear?(string)
-      when CommandType::DEMAND
-        return matches_demand?(string)
-      else
-        raise InvalidCommandType.new("invalid command type provided to bot")
-      end
-    end
+  def gen_man_response(
+                    text : String, 
+                    event : Slack::Api::Event, 
+                    channel : String, 
+                    bot : Bot,
+                    timestamp : String
+                  ) : Response
+      Response.new(
+                    event: event, 
+                    text: text,
+                    channel: channel,
+                    bot: bot,
+                    timestamp: timestamp
+      )
+  end
 
-    private def matches_demand?(string : String) : Bool
-      match = /\A(?:#{@bot.name}\s|<@#{@bot.id}>\s)+#{@matcher}\z/i =~ string
-      !!match
-    end
+  private def matches_demand?(string : String) : Bool
+    match = /\A(?:#{@bot.name}\s|<@#{@bot.id}>\s)+#{@matcher}\z/i =~ string
+    !!match
+  end
 
-    private def matches_hear?(string : String) : Bool
-      match = /\A#{@matcher}\z/i =~ string
-      !!match
-    end
+  private def matches_hear?(string : String) : Bool
+    match = /\A#{@matcher}\z/i =~ string
+    !!match
   end
 end

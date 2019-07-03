@@ -1,14 +1,14 @@
 require "./bot/**"
 
 class App
-  getter bots : Array(Bot::Bot)
-  getter commands : Array(Bot::Command)
+  getter bots : Array(Bot)
+  getter commands : Array(Command)
 
-  def add_bot(bot : Bot::Bot)
+  def add_bot(bot : Bot)
     @bots.push(bot)
   end
 
-  def add_command(command : Bot::Command)
+  def add_command(command : Command)
     @commands.push(command)
   end
 
@@ -17,7 +17,7 @@ class App
   end
 
   private def initialize
-    @bots = [] of Bot::Bot
-    @commands = [] of Bot::Command
+    @bots = [] of Bot
+    @commands = [] of Command
   end
 end
