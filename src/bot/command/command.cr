@@ -3,8 +3,7 @@ require "../exception/invalid_command_type"
 require "../../slack/api/*"
 
 class Command
-  getter response : Response
-
+  
   def initialize(
     bot : Bot,
     command_type : CommandType,
