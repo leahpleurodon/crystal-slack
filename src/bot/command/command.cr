@@ -13,7 +13,6 @@ class Command
     @bot = bot
     @command_type = command_type
     @matcher = matcher
-    @response = uninitialized Response
   end
 
   def matches?(string : String) : Bool
@@ -25,32 +24,6 @@ class Command
     else
       raise InvalidCommandType.new("invalid command type provided to bot")
     end
-  end
-
-  def set_auto_response(text : String, event : Slack::Api::Event) : Response
-    @response = Response.new(
-                  event: event, 
-                  text: text,
-                  channel: event.event_channel,
-                  bot: @bot,
-                  timestamp: "0"
-    )
-  end
-
-  def set_man_response(
-                    text : String, 
-                    event : Slack::Api::Event, 
-                    channel : String, 
-                    bot : Bot,
-                    timestamp : String
-                  ) : Response
-      @response = Response.new(
-                    event: event, 
-                    text: text,
-                    channel: channel,
-                    bot: bot,
-                    timestamp: timestamp
-      )
   end
 
   private def matches_demand?(string : String) : Bool

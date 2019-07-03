@@ -3,13 +3,11 @@ require "../../slack/api/post_message_request"
 class Response
 
     def initialize(
-                    event : Slack::Api::Event, 
                     text : String,
                     channel : String,
                     bot : Bot,
                     timestamp : String
         )
-        @event = event
         @response_text = text
         @channel = channel
         @bot = bot
