@@ -22,4 +22,5 @@ describe "#parsed_response" do
     event_channel_type: "CHANNEL"
     )
     bot = Bot.new(ENV["SLACK_BOT_TOKEN"], "BOT")
+    WebMock.reset
 end
