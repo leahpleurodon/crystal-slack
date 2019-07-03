@@ -25,7 +25,7 @@ class Command
     end
   end
 
-  def call(event : Event)
+  def call(event : Slack::Api::Event)
     # This method should get over-ridden
     puts "method not implemented."
   end
