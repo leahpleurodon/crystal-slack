@@ -1,4 +1,5 @@
 require "./bot/**"
+require "./slack/api/event/event_receiver"
 
 class App
   getter bots : Array(Bot)
@@ -7,6 +8,10 @@ class App
 
   def add_bot(bot : Bot)
     @bots.push(bot)
+  end
+
+  def run_app_server
+    run_server
   end
 
   def set_event(event : Slack::Api::Event)

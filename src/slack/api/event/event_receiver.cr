@@ -16,7 +16,7 @@ end
 private def handle_event_and_return_ok(json : JSON::Any)
   begin
     event = Slack::Api::EventParser.new(json).to_event
-    app.singleton.set_event(event)
+    App.singleton.set_event(event)
     command = EventCommandMatcher.find_command_match(App.singleton, event)
     command.response.post! if command
     return {"ok": "true"}.to_json
