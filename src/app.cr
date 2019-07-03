@@ -3,9 +3,14 @@ require "./bot/**"
 class App
   getter bots : Array(Bot)
   getter commands : Array(Command)
+  getter event : Slack::Api::Event
 
   def add_bot(bot : Bot)
     @bots.push(bot)
+  end
+
+  def set_event(event : Slack::Api::Event)
+    @event = event
   end
 
   def add_command(command : Command)
@@ -19,5 +24,6 @@ class App
   private def initialize
     @bots = [] of Bot
     @commands = [] of Command
+    @event = uninitialized Slack::Api::Event
   end
 end
