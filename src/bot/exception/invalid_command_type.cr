@@ -1,4 +1,3 @@
-module Bot
-  class InvalidCommandType < Exception
-  end
+
+class InvalidCommandType < Exception
 end
