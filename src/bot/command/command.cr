@@ -25,6 +25,11 @@ class Command
     end
   end
 
+  def call(event : Event)
+    # This method should get over-ridden
+    puts "method not implemented."
+  end
+
   private def matches_demand?(string : String) : Bool
     match = /\A(?:#{@bot.name}\s|<@#{@bot.id}>\s)+#{@matcher}\z/i =~ string
     !!match
