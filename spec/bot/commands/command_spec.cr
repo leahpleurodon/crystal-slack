@@ -107,7 +107,7 @@ describe "GENERATE RESPONSES" do
         headers: {"mocked" => "true"}
       )
     
-    auto_response = command.gen_auto_response("window", event)
+    auto_response = command.set_auto_response("window", event)
     posted_response = auto_response.post!
 
     json_body = JSON.parse(posted_response.body)
@@ -125,7 +125,7 @@ describe "GENERATE RESPONSES" do
         headers: {"mocked" => "true"}
       )
     
-    man_response = command.gen_man_response(
+    man_response = command.set_man_response(
                                             "window", 
                                             event, 
                                             "DODOO", 

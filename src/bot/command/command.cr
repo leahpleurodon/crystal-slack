@@ -27,8 +27,8 @@ class Command
     end
   end
 
-  def gen_auto_response(text : String, event : Slack::Api::Event) : Response
-    Response.new(
+  def set_auto_response(text : String, event : Slack::Api::Event) : Response
+    @response = Response.new(
                   event: event, 
                   text: text,
                   channel: event.event_channel,
@@ -37,14 +37,14 @@ class Command
     )
   end
 
-  def gen_man_response(
+  def set_man_response(
                     text : String, 
                     event : Slack::Api::Event, 
                     channel : String, 
                     bot : Bot,
                     timestamp : String
                   ) : Response
-      Response.new(
+      @response = Response.new(
                     event: event, 
                     text: text,
                     channel: channel,
