@@ -24,7 +24,7 @@ Your bot can just listen for events and it can respond to them.
 ## Bots
 You can create several bots in your app if you so choose.
 
-To create a bot, your bot requires a slack bot token, to acquire one, follow THESE instructions.
+To create a bot, your bot requires a slack bot token, to acquire one, follow [these instructions](https://api.slack.com/bot-users#), (the creating a bot section and installing to workspace section, sections 1 and 3).
 
 ```crystal
   bot = Bot.new(BOTSLACKTOKEN, optional-name)
@@ -89,6 +89,17 @@ e.g the following repsonse sends "is it me you're looking for" to the specified 
 
 The timestamp is the only real gotcha here, in order to post in the channel and not in a thread the time stamp must be "0" otherwise the timestamp of the thread as a string is required.
 
+## Logging 
+Crystal slack comes with a logger in built into the App singleton class... 
+the default log level is warning...
+
+to change the log level use following method:
+
+```crystal
+  App.singleton.set_log_level(severity: Severity::INFO)
+```
+Severity levels are defined by crystal [see here for more info.](https://crystal-lang.org/api/0.24.2/Logger.html)
+
 ## Putting it all together...
 Here I have a simple app with a bot that response to any messages that equal `"hello..."` with `"is it me you're looking for"`
 
@@ -99,6 +110,7 @@ require "./richie_command"
 
 module RichieBot
   app = App.singleton
+  app.set_log_level(Severity::DEBUG)
   bot = Bot.new("xoxb-XXXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXXXXX")
   command = RichieCommand.new(
     bot,
@@ -121,9 +133,35 @@ class RichieCommand < Command
             bot: @bot,
             timestamp: "0"
         ).post!
+        App.singleton.logger.info("posted the response 'is it me you\'re looking for' in the channel: #{event.event_channel}")
     end
 end
 ```
+
+# Slack set up.
+
+You need to [create a slack app](https://api.slack.com/apps) and add a bot user.
+Following that you need to enable the events api see [this slack article](https://api.slack.com/bot-users#setup-events-api) on how to do so.
+
+The following events are currently supported by the shard:
+- message.channels
+
+  A message was posted to a channel
+
+- message.groups
+  
+  A message was posted to a private channel
+
+- message.im
+  
+  A message was posted in a direct message channel
+
+message.mpim
+  
+  A message was posted in a multiparty direct message channel
+
+## Testing your app
+What you will notice is that the events API  the events api requires an endpoint to send the events to... if you wish to test locally rather than in the cloud, [this article](https://api.slack.com/tutorials/tunneling-with-ngrok) is a useful article written by slack on how to do so.
 
 ## Contributing
 
