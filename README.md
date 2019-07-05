@@ -1,6 +1,6 @@
 # rea-crystal-bot
 
-This gem is designed to make creating apps for slack in crystal easy... version 0 currently only supports sending/receiving messages via the slack Events API.
+This shard is designed to make creating apps for slack in crystal easy... version 0 currently only supports sending/receiving messages via the slack Events API.
 Keep an eye on the repo to see when new features are coming.
 
 ## Installation
