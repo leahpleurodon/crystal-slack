@@ -15,6 +15,7 @@ class Command
   end
 
   def matches?(string : String) : Bool
+    App.singleton.logger.debug("finding matches for #{string}")
     case @command_type
     when CommandType::HEAR
       return matches_hear?(string)
@@ -27,7 +28,7 @@ class Command
 
   def call(event : Slack::Api::Event)
     # This method should get over-ridden
-    puts "method not implemented."
+    App.singleton.logger.error("command call method not implemented.")
   end
 
   private def matches_demand?(string : String) : Bool

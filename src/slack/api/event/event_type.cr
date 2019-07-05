@@ -5,6 +5,7 @@ module Slack
       IM
       MPIM
       GROUP
+      UNKNOWN
     end
   end
 end

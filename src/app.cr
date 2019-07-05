@@ -5,6 +5,7 @@ class App
   getter bots : Array(Bot)
   getter commands : Array(Command)
   getter event : Slack::Api::Event
+  getter logger : Logger
 
   def add_bot(bot : Bot)
     @bots.push(bot)
@@ -22,6 +23,10 @@ class App
     @commands.push(command)
   end
 
+  def set_log_level(severity : Severity)
+    @logger.level = severity
+  end
+
   def self.singleton
     @@instance ||= new
   end
@@ -30,5 +35,6 @@ class App
     @bots = [] of Bot
     @commands = [] of Command
     @event = uninitialized Slack::Api::Event
+    @logger = Logger.new(STDOUT, level: Logger::WARN)
   end
 end

@@ -20,5 +20,6 @@ class Response
             bot_token: @bot.token, 
             t_stamp: @timestamp
         ).perform!
+        App.singleton.logger.info("post: bot_user:#{@bot.id}, channel: #{@channel}, text: #{@response_text}, timestamp: #{@timestamp}")
     end
 end

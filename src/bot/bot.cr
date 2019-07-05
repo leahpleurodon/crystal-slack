@@ -15,8 +15,10 @@ class Bot
   end
 
   private def parse_auth_data : JSON::Any
+    App.singleton.logger.debug("getting bot details")
     response = Slack::Api::AuthTestRequest.new(@token).perform!
     json_body = JSON.parse(response.body)
+    App.singleton.logger.warn("bot details unavailable, demand commands will not work as expected.") unless json_body["ok"] == true
     return json_body["ok"] == true ? json_body : JSON.parse("{\"user\":\"BOT\", \"user_id\":\"NOID\"}")
   end
 end
